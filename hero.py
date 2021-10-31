@@ -12,8 +12,26 @@ class Hero:
     else:
       print(f"{opponent.name} destroys {self.name}!")      
 
-if __name__ == "__main__":
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero("Dumbledore")
+class Ability:
+    def __init__(self, name, max_damage):
+      self.name = name
+      self.max_damage = max_damage  
 
-    hero1.fight(hero2)
+    def attack(self):
+      random_value = random.randint(0,self.max_damage)
+      return random_value
+
+
+if __name__ == "__main__":
+  hero1 = Hero("Wonder Woman")
+  hero2 = Hero("Dumbledore")
+
+  hero1.fight(hero2)
+
+  ability = Ability("Debugging Ability", 20)
+  print(ability.name)
+  print(ability.attack())
+
+  armor = Armor("Debugging Shield", 10)
+  print(armor.name)
+  print(armor.block())
