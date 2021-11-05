@@ -1,6 +1,7 @@
 from os import name
 from ability import Ability
 from armor import Armor
+from weapon import Weapon
 import random
 
 
@@ -12,10 +13,24 @@ class Hero:
     self.abilities = list()
     self.armors = list()
 
+# ---------- CUSTOMIZE HERO ----------------------- #
+  def add_ability(self, ability):
+    self.abilities.append(ability)
+
+  def add_armor(self, armor):
+    self.armors.append(armor)
+
+  def add_weapon(self, weapon):
+    self.abilities.append(weapon)
+
+
+# ----------------------------------------------- #
   def is_alive(self):
     if self.current_health <= 0:
       return False
     return True
+
+  # ---------- ACTIONS ----------------------- #
 
   def fight(self, opponent):
     if random.randint(0,1) == 1:
@@ -24,13 +39,6 @@ class Hero:
       winner=opponent.name  
     print(f"{winner} destroys {self.name}!")      
    
-
-  def add_ability(self, ability):
-    self.abilities.append(ability)
-
-  def add_armor(self, armor):
-    self.armors.append(armor)
-
   def attack(self):
     total_damage = 0
     for ability in self.abilities:
@@ -50,6 +58,7 @@ class Hero:
     # print(hurt)
     self.current_health = self.current_health - hurt
 
+# ----------  FIGHT ----------------------- #
   def fight(self, opponent):
     if len(self.abilities)==0 and len(opponent.abilities)==0:
       print("Draw!")
@@ -68,8 +77,14 @@ class Hero:
           won = True;
           break
 
-
+# ---------- RUN ----------------------- #
 if __name__ == "__main__":
+
+    hero = Hero("Wonder Woman")
+    weapon = Weapon("Lasso of Truth", 90)
+    hero.add_weapon(weapon)
+    print(hero.attack())
+
   # ability = Ability("Great Debugging", 50)
   # another_ability = Ability("Smarty Pants", 90)
   # hero = Hero("Grace Hopper", 200)
@@ -89,17 +104,17 @@ if __name__ == "__main__":
   # hero.take_damage(15000)
   # print(hero.is_alive())
 
-  hero1 = Hero("Wonder Woman")
-  hero2 = Hero("Dumbledore")
-  ability1 = Ability("Super Speed", 30)
-  ability2 = Ability("Super Eyes", 60)
-  ability3 = Ability("Wizard Wand", 80)
-  ability4 = Ability("Wizard Beard", 20)
-  hero1.add_ability(ability1)
-  hero1.add_ability(ability2)
-  hero2.add_ability(ability3)
-  hero2.add_ability(ability4)
-  hero1.fight(hero2)  
+  # hero1 = Hero("Wonder Woman")
+  # hero2 = Hero("Dumbledore")
+  # ability1 = Ability("Super Speed", 30)
+  # ability2 = Ability("Super Eyes", 60)
+  # ability3 = Ability("Wizard Wand", 80)
+  # ability4 = Ability("Wizard Beard", 20)
+  # hero1.add_ability(ability1)
+  # hero1.add_ability(ability2)
+  # hero2.add_ability(ability3)
+  # hero2.add_ability(ability4)
+  # hero1.fight(hero2)  
 
   # ability = Ability("Great Debugging", 50)
   # hero = Hero("Grace Hopper", 200)
