@@ -13,6 +13,15 @@ class Hero:
     self.abilities = list()
     self.armors = list()
 
+    self.deaths = 0
+    self.kills = 0
+
+  def add_kill(self, num_kills):
+    self.kills += num_kills
+
+  def add_death(self, num_deaths):
+    self.deaths += num_deaths
+
 # ---------- CUSTOMIZE HERO ----------------------- #
   def add_ability(self, ability):
     self.abilities.append(ability)
@@ -23,7 +32,6 @@ class Hero:
   def add_weapon(self, weapon):
     self.abilities.append(weapon)
 
-
 # ----------------------------------------------- #
   def is_alive(self):
     if self.current_health <= 0:
@@ -32,12 +40,12 @@ class Hero:
 
   # ---------- ACTIONS ----------------------- #
 
-  def fight(self, opponent):
-    if random.randint(0,1) == 1:
-      winner=self.name  
-    else:
-      winner=opponent.name  
-    print(f"{winner} destroys {self.name}!")      
+  # def fight(self, opponent):
+  #   if random.randint(0,1) == 1:
+  #     winner=self.name  
+  #   else:
+  #     winner=opponent.name  
+  #   print(f"{winner} destroys {self.name}!")      
    
   def attack(self):
     total_damage = 0
@@ -69,11 +77,15 @@ class Hero:
         # print(opponent.current_health)
         if not opponent.is_alive():
           print(f"{self.name} won!")
+          opponent.add_death(1)
+          self.add_kill(1)
           won = True;
           break
         self.take_damage(opponent.attack())
         if not self.is_alive():
           print(f"{opponent.name} won!")
+          self.add_death(1)
+          opponent.add_kill(1)
           won = True;
           break
 
