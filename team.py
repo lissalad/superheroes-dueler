@@ -24,8 +24,11 @@ class Team:
 
   def stats(self):
     for hero in self.heroes:
-      kd = hero.kills / hero.deaths
-      print(f"{hero.name} Kill/Deaths:{kd}")
+      try:
+        kd = hero.kills / hero.deaths
+        print(f"{hero.name} Kill/Deaths: {kd}")
+      except ZeroDivisionError:
+        print(f"{hero.name} Kill/Deaths: {float(hero.kills)}")
 
   def revive_heroes(self, health=100):
     for hero in self.heroes:
@@ -41,11 +44,13 @@ class Team:
     for hero in other_team.heroes:
       living_opponents.append(hero)
 
-    while len(living_heroes) > 0 and len(living_opponents)> 0:
-      hero = random.choice(living_heroes)
-      opponent = random.choice(living_opponents)
-      hero.fight(opponent)
-      if not hero.is_alive:
-        living_heroes.remove(hero)
-      if not opponent.is_alive:
-        living_opponents.remove(opponent)
+      while len(living_heroes) > 0 and len(living_opponents) > 0:
+          hero = random.choice(living_heroes)
+          opponent = random.choice(living_opponents)
+
+          hero.fight(opponent)
+
+          if hero.is_alive():
+              living_opponents.remove(opponent)
+          else:
+              living_heroes.remove(hero)

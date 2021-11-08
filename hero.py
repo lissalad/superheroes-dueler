@@ -75,27 +75,43 @@ class Hero:
       while not won:
         opponent.take_damage(self.attack())
         # print(opponent.current_health)
-        if not opponent.is_alive():
-          print(f"{self.name} won!")
-          opponent.add_death(1)
-          self.add_kill(1)
-          won = True;
-          break
+        if not opponent.is_alive():  
+            print(f"{self.name} won!")
+            opponent.add_death(1)
+            self.add_kill(1)
+            won = True;
+            return
         self.take_damage(opponent.attack())
         if not self.is_alive():
           print(f"{opponent.name} won!")
           self.add_death(1)
           opponent.add_kill(1)
           won = True;
-          break
+          return
 
 # ---------- RUN ----------------------- #
 if __name__ == "__main__":
 
-    hero = Hero("Wonder Woman")
-    weapon = Weapon("Lasso of Truth", 90)
-    hero.add_weapon(weapon)
-    print(hero.attack())
+
+    hero1 = Hero("Wonder Woman")
+    hero2 = Hero("Dumbledore")
+    ability1 = Ability("Super Speed", 300)
+    ability2 = Ability("Super Eyes", 130)
+    ability3 = Ability("Wizard Wand", 80)
+    ability4 = Ability("Wizard Beard", 20)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+    hero1.fight(hero2)
+
+
+    # hero = Hero("Wonder Woman")
+    # weapon = Weapon("Lasso of Truth", 90)
+    # hero.add_weapon(weapon)
+    # print(hero.attack())
+
+    
 
   # ability = Ability("Great Debugging", 50)
   # another_ability = Ability("Smarty Pants", 90)
